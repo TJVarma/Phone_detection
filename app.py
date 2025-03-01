@@ -1,20 +1,29 @@
 # app.py
 import cv2
 import numpy as np
-from tensorflow.keras.models import load_model
-from flask import Flask, render_template, Response, request
 import os
+from flask import Flask, render_template, Response, request
+import tensorflow as tf
+from tensorflow.keras.models import load_model
 
-# Initialize Flask app first
+# Initialize Flask app
 app = Flask(__name__)
 
 # Parameters
 IMG_SIZE = 64
 categories = ["iphone", "samsung", "motorola"]
 CONFIDENCE_THRESHOLD = float(os.getenv("CONFIDENCE_THRESHOLD", 0.5))
-# app.py
-MODEL_PATH = os.getenv("MODEL_PATH", "phone_brand_classifier.h5")  # No /app/ prefix
-model = load_model(MODEL_PATH)
+
+# Disable GPU (optional)
+os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
+
+# Load Model
+MODEL_PATH = os.getenv("MODEL_PATH", "phone_brand_classifier.h5")
+
+if not os.path.exists(MODEL_PATH):
+    raise FileNotFoundError(f"Model file '{MODEL_PATH}' not found. Ensure it is uploaded correctly.")
+
+model = tf.keras.models.load_model(MODEL_PATH, compile=False)
 
 def predict_phone(image):
     img_resized = cv2.resize(image, (IMG_SIZE, IMG_SIZE))
@@ -38,5 +47,5 @@ def index():
     return render_template('index.html', prediction=None)
 
 if __name__ == "__main__":
-    port = int(os.getenv("PORT", 5000))  # Render's dynamic port
+    port = int(os.getenv("PORT", 10000))  # Render's dynamic port
     app.run(host='0.0.0.0', port=port, debug=False, threaded=True)
