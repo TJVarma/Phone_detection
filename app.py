@@ -4,6 +4,10 @@ import numpy as np
 from tensorflow.keras.models import load_model
 from flask import Flask, render_template, Response
 
+@app.route('/')
+def index():
+    return render_template('index.html')  # No 'templates/' prefix
+
 # Parameters
 IMG_SIZE = 64
 categories = ["Google Pixel","Iphone","Samsung"]
