@@ -12,7 +12,8 @@ app = Flask(__name__)
 IMG_SIZE = 64
 categories = ["iphone", "samsung", "motorola"]
 CONFIDENCE_THRESHOLD = float(os.getenv("CONFIDENCE_THRESHOLD", 0.5))
-MODEL_PATH = os.getenv("MODEL_PATH", "/app/phone_brand_classifier.h5")  # Render path
+# app.py
+MODEL_PATH = os.getenv("MODEL_PATH", "phone_brand_classifier.h5")  # No /app/ prefix
 model = load_model(MODEL_PATH)
 
 def predict_phone(image):
