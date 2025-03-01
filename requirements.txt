@@ -1,5 +1,4 @@
 tensorflow==2.18.0
-keras==2.18.0
 opencv-python-headless
 flask
 gunicorn
