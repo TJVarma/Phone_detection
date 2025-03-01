@@ -1,20 +1,21 @@
-<!-- templates/index.html -->
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Phone Brand Detector</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="/style.css">  <!-- Updated path -->
 </head>
 <body>
     <div class="container">
         <header>
             <h1>Phone Brand Detector</h1>
+            <p>Point your webcam at a phone to detect its brand (iPhone, Samsung, Motorola). If no phone is detected, it shows "No Phone".</p>
         </header>
         <main>
             <div class="video-container">
-                <img src="{{ url_for('video_feed') }}" alt="Video Feed" class="video-feed">
+                <img src="#" alt="Static placeholder" class="video-feed">  <!-- No video feed -->
             </div>
         </main>
         <footer>
